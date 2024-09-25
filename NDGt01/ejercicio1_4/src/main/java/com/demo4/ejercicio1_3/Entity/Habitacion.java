@@ -1,13 +1,13 @@
 package com.demo4.ejercicio1_3.Entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public abstract class Habitacion {
 
     protected int num;
     protected Boolean ocupada;
-    protected LocalDate checkIn;
+    protected LocalDateTime checkIn;
 
     public Habitacion(int num){
         this.num = num;
@@ -15,18 +15,16 @@ public abstract class Habitacion {
     }
 
     public long checkOut() {
-        this.ocupada = false;
+        LocalDateTime checkOut = LocalDateTime.now();
 
-        LocalDate fechaSalida = LocalDate.now(); 
-        
-        long diasEstancia = java.time.temporal.ChronoUnit.SECONDS.between(checkIn, fechaSalida);
-        
-        return diasEstancia;
+        long segundos = ChronoUnit.SECONDS.between(checkIn, checkOut);
+    
+        return segundos; 
     }
 
     public void checkIn() {
         this.ocupada = true;
-        this.checkIn = LocalDate.now(); 
+        this.checkIn = LocalDateTime.now(); 
     }
 
     public int getNum() {
