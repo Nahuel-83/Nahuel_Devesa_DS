@@ -8,7 +8,7 @@ public class Calefacion extends Objeto{
 
     public Calefacion() {
         grados = 20;
-        revison = LocalDate.now();
+        revison = null;
     }
 
     @Override
