@@ -19,6 +19,7 @@ public abstract class Habitacion {
 
         long segundos = ChronoUnit.SECONDS.between(checkIn, checkOut);
     
+        this.ocupada = false;
         return segundos; 
     }
 
