@@ -9,7 +9,7 @@ public abstract class Habitacion {
     protected Boolean ocupada;
     protected LocalDateTime checkIn;
 
-    public Habitacion(int num){
+    public Habitacion(int num) {
         this.num = num;
         this.ocupada = false;
     }
@@ -18,14 +18,14 @@ public abstract class Habitacion {
         LocalDateTime checkOut = LocalDateTime.now();
 
         long segundos = ChronoUnit.SECONDS.between(checkIn, checkOut);
-    
+
         this.ocupada = false;
-        return segundos; 
+        return segundos;
     }
 
     public void checkIn() {
         this.ocupada = true;
-        this.checkIn = LocalDateTime.now(); 
+        this.checkIn = LocalDateTime.now();
     }
 
     public int getNum() {
@@ -42,6 +42,5 @@ public abstract class Habitacion {
     }
 
     public abstract double calcularPrecio(long diasEstancia);
-    
-    
+
 }

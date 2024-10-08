@@ -10,10 +10,10 @@ import com.demo4.ejercicio1_3.Entity.Hotel;
 @SpringBootApplication
 public class Ejercicio13Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Ejercicio13Application.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(Ejercicio13Application.class, args);
 
-	 	Hotel hotel = new Hotel();
+        Hotel hotel = new Hotel();
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
@@ -55,5 +55,3 @@ public class Ejercicio13Application {
         scanner.close();
     }
 }
-
-

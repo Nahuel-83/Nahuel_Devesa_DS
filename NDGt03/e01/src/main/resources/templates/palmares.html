@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <html xmlns:th="http://www.thymeleaf.org"></html>
+    <title>FC Barcelona - Palmarés</title>
+</head>
+<body>
+    <header>
+        <h1>FC Barcelona - Palmarés</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/user/index}">Inicio</a></li>
+                <li><a th:href="@{/user/palmares}">Palmarés</a></li>
+                <li><a th:href="@{/user/galeria-fotos}">Galería de Fotos</a></li>
+                <li><a th:href="@{/user/enlaces}">Enlaces Externos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Lista de Títulos</h2>
+        <ul>
+            <li>La Liga: 26 títulos</li>
+            <li>Copa del Rey: 31 títulos</li>
+            <li>Champions League: 5 títulos</li>
+            <li>Supercopa de España: 13 títulos</li>
+            <li>Mundial de Clubes: 3 títulos</li>
+        </ul>
+
+        <div class="imagen-vitrina"></div>
+            <img th:src="@{/vitrina-barca.jpg}" alt="Vitrina de trofeos del FC Barcelona">
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 FC Barcelona Fans</p>
+    </footer>
+</body>
+</html>

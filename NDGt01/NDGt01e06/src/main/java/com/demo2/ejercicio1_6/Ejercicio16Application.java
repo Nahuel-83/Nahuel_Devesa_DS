@@ -2,10 +2,7 @@ package com.demo2.ejercicio1_6;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 import org.springframework.boot.SpringApplication;
@@ -19,10 +16,9 @@ public class Ejercicio16Application {
 	public static void main(String[] args) {
         
 		SpringApplication.run(Ejercicio16Application.class, args);
-
 		
         Primitiva primitiva = new Primitiva();
-
+    
         Set<Integer> combinacionUsuario = primitiva.obtenerCombinacionUsuario();
 
         List<Integer> listaCombinacionUsuario = new ArrayList<>(combinacionUsuario);
