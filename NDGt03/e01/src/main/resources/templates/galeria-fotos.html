@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/styles.css}">
     <html xmlns:th="http://www.thymeleaf.org"></html>
     <title>FC Barcelona - Galería de Fotos</title>
@@ -10,14 +11,7 @@
 <body>
     <header>
         <h1>FC Barcelona - Galería de Fotos</h1>
-        <nav>
-            <ul>
-                <li><a th:href="@{/user/index}">Inicio</a></li>
-                <li><a th:href="@{/user/palmares}">Palmarés</a></li>
-                <li><a th:href="@{/user/galeria-fotos}">Galería de Fotos</a></li>
-                <li><a th:href="@{/user/enlaces}">Enlaces Externos</a></li>
-            </ul>
-        </nav>
+        <nav th:replace="fragments :: menu"></nav>
     </header>
     <main>
         <h2>Fotos del FC Barcelona</h2>

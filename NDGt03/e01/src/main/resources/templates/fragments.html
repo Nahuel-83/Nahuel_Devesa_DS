@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragmentos de Thymeleaf</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+</head>
+<body>
+    <nav th:fragment="menu" class="navbar navbar-expand-sm" style="background-color: #9B1B30;">
+        <div class="container-fluid justify-content-center"> 
+            <ul class="navbar-nav text-center">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/user/index}" style="color: white;">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/user/palmares}" style="color: white;">Palmarés</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/user/galeria-fotos}" style="color: white;">Galería de fotos</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/user/enlaces}" style="color: white;">Enlaces externos</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>
