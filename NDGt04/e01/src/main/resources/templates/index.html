@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cálculos</title>
+</head>
+<body>
+    <h1>Cálculos</h1>
+
+    <h2>Comprobar si un número es primo</h2>
+    <form th:action="@{/calculos/primo}" method="get">
+        <input type="number" name="numero" placeholder="Ingrese un número" required>
+        <button type="submit">Comprobar Primo</button>
+    </form>
+
+    <h2>Calcular la hipotenusa</h2>
+    <form th:action="@{/calculos/hipotenusa/{cateto1}/{cateto2}(cateto1=0, cateto2=0)}" method="get" onsubmit="setCatetos();">
+        <input type="number" id="cateto1" placeholder="Ingrese cateto 1" required>
+        <input type="number" id="cateto2" placeholder="Ingrese cateto 2" required>
+        <button type="submit">Calcular Hipotenusa</button>
+    </form>
+
+    <h2>Obtener divisores de un número</h2>
+    <form th:action="@{/calculos/divisores/0}" method="get" onsubmit="setDivisores();">
+        <input type="number" id="divisoresNum" placeholder="Ingrese un número" required>
+        <button type="submit">Obtener Divisores</button>
+    </form>
+
+    <script>
+        function setCatetos() {
+            const cateto1 = document.getElementById('cateto1').value;
+            const cateto2 = document.getElementById('cateto2').value;
+            const form = event.target;
+            form.action = `/calculos/hipotenusa/${cateto1}/${cateto2}`;
+        }
+
+        function setDivisores() {
+            const numero = document.getElementById('divisoresNum').value;
+            const form = event.target;
+            form.action = `/calculos/divisores/${numero}`;
+        }
+    </script>
+</body>
+</html>

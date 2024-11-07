@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Listado de números aleatorios</title>
+    <style>
+        .green {
+            color: darkgreen;
+            background-color: lightgreen;
+        }
+
+        .red {
+            color: red;
+            background-color: pink;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Listado de numeros aleatorios</h1>
+
+    <div th:if="${numbers.size() > 0}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Operación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="number, iter : ${numbers}">
+                    <td th:text="${number}" th:class="${number > 50} ? 'green' : 'red'"></td>
+                    <td>
+                        <a th:href="@{/delete(index=${iter.index})}">delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Total números: <span th:text="${total}"></span></p>
+
+    <form method="post" action="/add">
+        <button type="submit">Nuevo número</button>
+    </form>
+</body>
+
+</html>

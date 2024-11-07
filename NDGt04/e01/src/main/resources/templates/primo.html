@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Primo</title>
+</head>
+<body>
+    <h1>Resultado</h1>
+    <p th:text="'El número ' + ${numero} + ' es ' + (${esPrimo} ? 'primo' : 'no primo')"></p>
+</body>
+</html>

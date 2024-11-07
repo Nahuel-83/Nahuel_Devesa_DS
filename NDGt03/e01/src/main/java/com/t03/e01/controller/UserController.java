@@ -3,6 +3,7 @@ package com.t03.e01.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,25 +11,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping({"/", "/index", "/home"})
-    public String index(@RequestParam(required = false) String usuario, Model model) {
-    String mensajeBienvenida;
-    
-    if (usuario != null && !usuario.isEmpty()) {
-        mensajeBienvenida = "Bienvenido " + usuario + " a nuestra web";
-    } else {
-        mensajeBienvenida = "Bienvenido a nuestra web";
-    }
+    @GetMapping({ "/", "/index", "/home" })
+    public String index(@RequestParam Optional<String> usuario, Model model) {
+        String mensajeBienvenida = usuario
+        .map(user -> "Bienvenido " + user + " a nuestra web")
+        .orElse("Bienvenido a nuestra web");
 
-    model.addAttribute("mensajeBienvenida", mensajeBienvenida);
-    model.addAttribute("year", LocalDate.now().getYear());
-    return "index"; 
-}
+        /*if (usuario != null && !usuario.isEmpty()) {
+            mensajeBienvenida = "Bienvenido " + usuario + " a nuestra web";
+        } else {
+            mensajeBienvenida = "Bienvenido a nuestra web";
+        }*/
+
+        model.addAttribute("mensajeBienvenida", mensajeBienvenida);
+        model.addAttribute("year", LocalDate.now().getYear());
+        return "index";
+    }
 
     @GetMapping("/palmares")
     public String palmares(Model model) {
@@ -50,5 +52,5 @@ public class UserController {
     public String enlaces() {
         return "enlaces-externos";
     }
-    
+
 }

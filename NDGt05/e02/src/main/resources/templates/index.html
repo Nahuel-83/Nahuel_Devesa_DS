@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Fechas</title>
+</head>
+<body>
+    <h1>Calculadora de Fechas</h1>
+    
+    <form method="post" action="/procesarFechas">
+        <label for="fecha1">Fecha 1:</label>
+        <input type="date" id="fecha1" name="fecha1" required>
+        <br><br>
+        
+        <label for="fecha2">Fecha 2:</label>
+        <input type="date" id="fecha2" name="fecha2" required>
+        <br><br>
+
+        <p>Selecciona una operación:</p>
+        <input type="radio" id="dias" name="operacion" value="dias" required>
+        <label for="dias">Calcular días entre ambas fechas</label><br>
+        
+        <input type="radio" id="bisiestos" name="operacion" value="bisiestos">
+        <label for="bisiestos">Listar años bisiestos entre las fechas</label><br>
+        
+        <input type="radio" id="domingo" name="operacion" value="domingo">
+        <label for="domingo">Contar años en que el 1 de enero fue domingo</label><br><br>
+
+        <input type="submit" value="Calcular">
+    </form>
+</body>
+</html>

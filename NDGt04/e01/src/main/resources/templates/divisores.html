@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Divisores</title>
+</head>
+<body>
+    <h1>Divisores del número [[${numero}]]</h1>
+    <ul>
+        <li th:each="divisor : ${divisores}">
+            <a th:href="@{/calculos/divisores/{divisor}(divisor=${divisor})}" th:text="${divisor}"></a>
+        </li>
+    </ul>
+</body>
+</html>
