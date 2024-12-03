@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Vacas</title>
+</head>
+<body>
+    <h1>Lista de Vacas</h1>
+    <ul>
+        <li th:each="vaca : ${vacas}" th:text="'ID: ' + ${vaca.id} + ' - Nombre: ' + ${vaca.nombre} + ' - Fecha Nacimiento: ' + ${vaca.fechaNac} +  '  - Peso: ' + ${vaca.peso}"></li>
+    </ul>
+    <a th:href="@{/}">Volver</a>
+</body>
+</html>

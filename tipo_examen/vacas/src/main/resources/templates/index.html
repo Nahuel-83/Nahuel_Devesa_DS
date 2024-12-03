@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vacas Lecheras</title>
+</head>
+<body>
+    <h1>Vacas Factory, tus vacas favoritas</h1>
+    <p>Selecciona una de las opciones</p>
+    <br />
+
+    <form method="post" th:action="@{/metodoVaca}">
+    <label for="metodo">Eligue que quieres hacer</label>
+    <select id="metodo" name="metodo" required>
+        <option value="crear" selected>Crear una vaca</option>
+        <option value="eliminar">Eliminar una vaca</option>
+        <option value="editar">Editar una vaca</option>
+        <option value="listar">Listar todas las vacas</option>
+    </select>
+
+        <button type="submit">Realiar operación</button>
+    </form>
+</body>
+</html>

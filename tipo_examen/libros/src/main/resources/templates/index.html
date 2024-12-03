@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Libreria Magic</title>
+</head>
+<body>
+    <h1>Libreria Magic, tus libros fabulosos</h1>
+    <p>Selecciona una de las opciones</p>
+    <br />
+
+    <form method="post" th:action="@{/libro}">
+    <label for="metodo">Eligue una opcion para hacer:</label>
+    <select id="metodo" name="metodo" required>
+        <option value="crear" selected>Añadir un libro</option>
+        <option value="listar">Listar todos los libros</option>
+    </select>
+
+        <button type="submit">Realiar operación</button>
+    </form>
+    <br />
+
+    <h1>Listado de libros de nuestra Librería Magic</h1>
+    <ul>
+        <li th:each="libro : ${libros}">
+            <span th:text="${libro.titulo}">Título</span>
+            <span th:text="${libro.autor}">Autor</span>
+            <form th:action="@{/eliminar}" method="post" style="display: inline;">
+                <input type="hidden" name="titulo" th:value="${libro.titulo}" />
+                <button type="submit">Eliminar</button>
+            </form>         
+        </li>
+    </ul>
+    <p th:if="${#lists.isEmpty(libros)}">No hay libros registrados en la librería.</p>    
+    
+</body>
+</html>

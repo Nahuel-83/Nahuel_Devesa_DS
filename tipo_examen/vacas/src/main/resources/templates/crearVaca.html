@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Vaca</title>
+</head>
+<body>
+    <h1>Crear una nueva Vaca</h1>
+    <form method="post" th:action="@{/crear}" enctype="multipart/form-data">
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id" required /><br />
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required /><br />
+
+        <label for="fechaNac">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNac" name="fechaNac" required /><br />
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" step="0.01" id="peso" name="peso" required /><br />
+
+        <label for="foto">Foto de perfil:</label>
+        <input type="file" id="foto" name="foto"/><br />
+
+        <button type="submit">Crear</button>
+    </form>
+    <p th:if="${error}" th:text="${error}" style="color:red"></p>
+    <p th:if="${success}" th:text="${success}" style="color:green"></p>
+    <a th:href="@{/}">Volver</a>
+</body>
+</html>

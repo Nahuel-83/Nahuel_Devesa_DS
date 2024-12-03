@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Bienvenido a la Tienda de Ropa</h1>
+    <p th:if="${#session.getAttribute('user') != null}">
+        Hola, <span th:text="${#session.getAttribute('user').name}"></span>!
+    </p>
+    <p th:if="${#session.getAttribute('user') == null}">
+        Hola! <a href="/register">Registrarse</a>
+    </p>
+    <a href="/cart">Ver Carrito</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Videclips manolito</title>
+</head>
+<body>
+    <h1>Videclips manolito, tus videclips fantastico</h1>
+    <p>Selecciona una de las opciones</p>
+    <br />
+
+    <form method="post" th:action="@{/vidioclip}">
+    <label for="metodo">Eligue una opcion para hacer:</label>
+    <select id="metodo" name="metodo" required>
+        <option value="crear" selected>Añadir un videclip</option>
+        <option value="listar">Listar todos los videclip</option>
+    </select>
+
+        <button type="submit">Realiar operación</button>
+    </form>
+    <br />
+
+    <h1>Listado de videclips</h1>
+    <ul>
+        <li th:each="videoclip : ${videoclips}">
+            <span th:text="'Título: &nbsp;&nbsp;' + ${videoclip.titulo} + '&nbsp;&nbsp;Artista: &nbsp;&nbsp;' + ${videoclip.artista}"></span>
+            <form th:action="@{/eliminar}" method="post" style="display: inline;">
+                <input type="hidden" name="titulo" th:value="${videoclip.titulo}" />
+                <button type="submit">Eliminar</button>
+            </form>         
+        </li>
+    </ul>
+    <p th:if="${#lists.isEmpty(videoclips)}">No hay videoclips registrados actualmente.</p>    
+    
+</body>
+</html>

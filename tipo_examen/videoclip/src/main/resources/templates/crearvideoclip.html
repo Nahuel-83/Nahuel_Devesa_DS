@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Videclips</title>
+</head>
+<body>
+    <h1>Añade un nuevo videclip</h1>
+    <form method="post" th:action="@{/crear}">
+        <label for="titulo">Titulo:</label>
+        <input type="text" id="titulo" name="titulo" required /><br />
+
+        <label for="artista">Artista:</label>
+        <input type="text" id="artista" name="artista" required /><br />
+
+        <label for="genero">Genero:</label>
+        <input type="text" id="genero" name="genero"/><br />
+
+        <label for="anopubli">Año de publicación:</label>
+        <input type="text" id="anopubli" name="anopubli" pattern="\d*" title="Introduce solo números"/><br />
+
+        <label for="url">URL del videclip:</label>
+        <input type="text" id="url" name="url"/><br />
+
+        <button type="submit">Añadir</button>
+    </form>
+    <p th:if="${error}" th:text="${error}" style="color:red"></p>
+    <p th:if="${success}" th:text="${success}" style="color:green"></p>
+    <a th:href="@{/}">Volver</a>
+</body>
+</html>

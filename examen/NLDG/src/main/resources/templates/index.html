@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Viajes manolito</title>
+</head>
+<body>
+    <h1>Viajes manolito, tus Viajes maravillosos</h1>
+    <p>Selecciona una de las opciones</p>
+    <br />
+
+    <form method="post" th:action="@{/viajes}">
+    <label for="metodo">Eligue una opcion para hacer:</label>
+    <select id="metodo" name="metodo" required>
+        <option value="crear" selected>Añadir un viaje</option>
+        <option value="listar">Listar todos los viajes</option>
+    </select>
+
+        <button type="submit">Realiar operación</button>
+    </form>
+    <br />
+
+    <h1>Listado de videclips</h1>
+    <ul>
+        <li th:each="viaje : ${viajes}">
+            <span th:text="'ID: &nbsp;&nbsp;' + ${viaje.id} + '&nbsp;&nbsp;Destino: &nbsp;&nbsp;' + ${viaje.destino} + '&nbsp;&nbsp;Duración: &nbsp;&nbsp;' + ${viaje.duracion} + '&nbsp;&nbsp;Descripcion: &nbsp;&nbsp;' + ${viaje.descripcion}"></span>
+            <form th:action="@{/viajes/eliminar}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${viaje.id}" />
+                <button type="submit">Eliminar</button>
+            </form><br />       
+        </li>
+    </ul>
+    <p th:if="${#lists.isEmpty(viajes)}">No hay viajes registrados en la agencia.</p>    
+    
+</body>
+</html>
