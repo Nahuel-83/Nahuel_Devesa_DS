@@ -2,11 +2,14 @@ package com.nldg.nldg.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.nldg.nldg.model.Viaje;
+import com.nldg.nldg.repository.ViajeRepository;
 
 @Service
 @Scope("session")
@@ -15,8 +18,11 @@ public class ViajeServiceImpl implements ViajeService {
     private ArrayList<Viaje> viajes = new ArrayList<>();
     private String error = null;
 
+    @Autowired
+    private ViajeRepository viajeRepository;
+
     @Override
-    public void eliminarViajes(Integer id) {
+    public void eliminarViajes(Long id) {
         Viaje viajeEliminar = null;
         for (Viaje viaje : viajes) {
             if (viaje.getId().equals(id)) {
@@ -40,7 +46,7 @@ public class ViajeServiceImpl implements ViajeService {
     }
 
     @Override
-    public void guardarViajes(Integer id,String destino, Integer duracion, LocalDate fecha, String descripcion) {
+    public void guardarViajes(Long id,String destino, Integer duracion, LocalDate fecha, String descripcion) {
         for (Viaje viaje : viajes) {
             if (viaje.getId().equals(id)) {
                 error = "Lo siento, este viaje no puede tener el mismo id que otro viaje, mire en el listado de viajes par obtener un numero apto";
@@ -91,14 +97,13 @@ public class ViajeServiceImpl implements ViajeService {
         }
 
         Viaje viajeNuevo = new Viaje(id, destino, duracion, fecha, descripcion);
-        viajes.add(viajeNuevo);
+        viajeRepository.save(viajeNuevo);
         error = null;
 
     }
 
     @Override
-    public ArrayList<Viaje> listarViajes() {
-        return viajes;
+    public List<Viaje> listarViajes() {
+        return viajeRepository.findAll();
     }
-
 }

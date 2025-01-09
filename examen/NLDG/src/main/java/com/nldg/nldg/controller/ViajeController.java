@@ -45,7 +45,7 @@ public class ViajeController {
     }
 
     @PostMapping("/viajes/eliminar")
-    public String eliminarLibro(@RequestParam("id") Integer id, Model model) {
+    public String eliminarLibro(@RequestParam("id") Long id, Model model) {
         viajeService.eliminarViajes(id);
         if (viajeService.getError() != null) {
             model.addAttribute("error", viajeService.getError());
@@ -63,7 +63,7 @@ public class ViajeController {
 
     @PostMapping("/viajes/crear")
     public String crearLibro(
-            @RequestParam("id") Integer id,
+            @RequestParam("id") Long id,
             @RequestParam("destino") String destino,
             @RequestParam("duracion") Integer duracion,
             @RequestParam("fecha") LocalDate fecha,

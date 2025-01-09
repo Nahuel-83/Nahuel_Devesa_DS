@@ -1,15 +1,30 @@
 package com.nldg.nldg.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "viaje")
 public class Viaje {
-    private Integer id;
+    @Id
+    private Long id;
+
+    @Column(name = "destino", nullable = false, length = 100)
     private String destino;
+
+    @Column(name = "duracion", nullable = false)
     private Integer duracion;
+
+    @Column(name = "fecha", nullable = false) 
     private LocalDate fecha;
+
+    @Column(name = "descripcion", length = 500) 
     private String descripcion;
-    
-    public Viaje(Integer id, String destino, Integer duracion, LocalDate fecha, String descripcion) {
+
+    public Viaje() {
+    }
+
+    public Viaje(Long id, String destino, Integer duracion, LocalDate fecha, String descripcion) {
         this.id = id;
         this.destino = destino;
         this.duracion = duracion;
@@ -49,11 +64,11 @@ public class Viaje {
         this.descripcion = descripcion;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
