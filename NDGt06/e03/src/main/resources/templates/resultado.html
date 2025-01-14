@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Resultado</title>
+    <title>Resultado del Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Resultado Final</h1>
-    <p th:text="'Puntaje: ' + ${puntaje} + ' / ' + ${total}"></p>
-    <a href="/test">Volver a empezar</a>
+    <h1>¡Test completado!</h1>
+    <div class="result">
+        <h2>Tu puntuación:</h2>
+        <p th:text="${puntaje + ' de ' + total + ' preguntas correctas'}"></p>
+        <p th:text="${'Porcentaje: ' + (puntaje * 100 / total) + '%'}"></p>
+    </div>
+    <a href="/"><button>Intentar de nuevo</button></a>
 </body>
 </html>

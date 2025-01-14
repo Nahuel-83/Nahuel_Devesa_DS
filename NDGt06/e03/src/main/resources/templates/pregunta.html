@@ -1,17 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Test</title>
+    <title>Pregunta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e4b1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-card {
+            background-color: #fdf4dc;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+        .quiz-card h2 {
+            margin: 0 0 10px;
+            color: #8b572a;
+            font-size: 18px;
+        }
+        .quiz-card p {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+        .answers {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .answer-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .answer-option input {
+            margin-right: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .btn-primary {
+            background-color: #8b572a;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="'Pregunta ' + ${pregunta.numero}"></h1>
-    <p th:text="${pregunta.texto}"></p>
-    <form th:action="@{'/test/pregunta/' + ${pregunta.numero}}" method="post">
-        <div th:each="respuesta, index : ${pregunta.respuestas}">
-            <input type="radio" name="respuesta" th:value="${index + 1}" required>
-            <span th:text="${respuesta}"></span><br>
-        </div>
-        <button type="submit">Responder</button>
-    </form>
+    <div class="quiz-card">
+        <h2 th:text="'Pregunta ' + ${pregunta.numero} + ' / 6'"></h2>
+        <p th:text="${pregunta.texto}"></p>
+        
+        <form action="/enviar" method="post">
+            <div class="answers">
+                <div th:each="answer, iter : ${pregunta.respuestas}">
+                    <label class="answer-option">
+                        <input type="radio" name="respuesta" th:value="${iter.index + 1}" required>
+                        <span th:text="${answer}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn-primary">Contestar</button>
+                <button type="button" class="btn-danger" onclick="nuevoJuego()">Nuevo Juego</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nuevoJuego() {
+            if (confirm("¿Seguro que quieres comenzar un nuevo juego?")) {
+                window.location.href = "/nuevo-juego";
+            }
+        }
+    </script>
 </body>
 </html>

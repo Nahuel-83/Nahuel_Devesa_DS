@@ -1,53 +1,45 @@
 package e03.e03.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import e03.e03.model.Pregunta;
-import e03.e03.service.TestServiceImpl;
+import e03.e03.service.TestService;
+
 
 @Controller
-@RequestMapping("/test")
 public class TestController {
-    @Autowired
-    private TestServiceImpl testService;
+    private final TestService testService;
 
-    private int numeroPregunta = 1;
-
-    @GetMapping
-    public String iniciarTest(Model model) {
-        numeroPregunta = 1;
-        testService.reiniciarTest();
-        return "redirect:/test/pregunta/" + numeroPregunta;
+    public TestController(TestService testService) {
+        this.testService = testService;
     }
 
-    @GetMapping("/pregunta/{numero}")
-    public String mostrarPregunta(@PathVariable int numero, Model model) {
-        Pregunta pregunta = testService.getPregunta(numero);
-        model.addAttribute("pregunta", pregunta);
-        return "pregunta";
+    @GetMapping("/")
+    public String startTest() {
+        testService.resetearTest();
+        return "redirect:/pregunta";  // Redirige a la primera pregunta
     }
 
-    @PostMapping("/pregunta/{numero}")
-    public String responderPregunta(@PathVariable int numero, @RequestParam int respuesta) {
-        testService.verificarRespuesta(numero, respuesta);
-        if (numero < testService.getPreguntas().size()) {
-            return "redirect:/test/pregunta/" + (numero + 1);
-        } else {
-            return "redirect:/test/resultado";
+    @GetMapping("/pregunta")
+    public String showPregunta(Model model) {
+        if (testService.getPreguntaActual() == null) {
+            return "redirect:/resultado";  // Si no hay más preguntas, muestra el resultado
         }
+        model.addAttribute("pregunta", testService.getPreguntaActual());
+        return "pregunta";  // Vista para mostrar la pregunta
+    }
+
+    @PostMapping("/enviar")
+    public String submitAnswer(@RequestParam("respuesta") int respuesta) {
+        testService.responderPregunta(respuesta);
+        return "redirect:/pregunta";  // Redirige a la siguiente pregunta
     }
 
     @GetMapping("/resultado")
-    public String mostrarResultado(Model model) {
+    public String showResultado(Model model) {
         model.addAttribute("puntaje", testService.getPuntaje());
-        model.addAttribute("total", testService.getPreguntas().size());
-        return "resultado";
+        model.addAttribute("total", testService.getTotalPreguntas());
+        return "resultado";  // Vista con los resultados finales
     }
 }
