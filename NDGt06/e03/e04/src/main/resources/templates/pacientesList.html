@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+</head>
+<body>
+    <h1>Consulta médica</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Fecha Nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${listaPacientes}">
+                <td th:text="${paciente.dni}">dni</td>
+                <td th:text="${paciente.nombre}">nombre</td>
+                <td th:text="${paciente.fechaNacimiento}">fechaNacimiento</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/newPaciente">Nuevo paciente</a><br/>
+    <a href="/delete">Llamar a consulta</a><br/>
+    <span th:if="${factura!=0}">Importe a pagar:<span th:text="${factura}"></span></span>
+</body>
