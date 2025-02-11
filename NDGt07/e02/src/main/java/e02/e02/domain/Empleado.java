@@ -1,5 +1,6 @@
 package e02.e02.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name="empleado")
+@Table(name = "empleado")
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +33,12 @@ public class Empleado {
     @NotEmpty
     private String nombre;
 
-    @Email(message = "Debe tener formato email valido")
+    @Email(message = "Debe tener formato email válido")
     private String email;
 
     private Double salario;
 
+    @Column(name = "en_activo")
     private boolean enActivo;
 
     @Enumerated(EnumType.STRING)

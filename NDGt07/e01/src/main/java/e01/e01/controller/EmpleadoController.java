@@ -25,14 +25,18 @@ public class EmpleadoController {
     public String showList(@RequestParam(required = false) String search,
             @RequestParam(required = false) String genero,
             @RequestParam(required = false) String msg,
-            @RequestParam(required = false) Double minSalario, // Parametro para salario
+            @RequestParam(required = false) Double minSalario, 
+            @RequestParam(required = false) Boolean salarioMayorPromedio,
             Model model) {
+
         if (msg != null) {
             model.addAttribute("msg", msg);
             model.addAttribute("alertClass", "alert-danger");
         }
 
-        if (search != null && !search.isBlank()) {
+        if (salarioMayorPromedio != null && salarioMayorPromedio) {
+            model.addAttribute("listaEmpleados", empleadoService.obtenerEmpleadosSalarioSuperiorAMedia());
+        } else if (search != null && !search.isBlank()) {
             model.addAttribute("listaEmpleados", empleadoService.buscarPorNombre(search));
         } else if (genero != null && !genero.isBlank()) {
             try {
@@ -47,7 +51,7 @@ public class EmpleadoController {
             model.addAttribute("listaEmpleados", empleadoService.obtenerTodos());
         }
 
-        model.addAttribute("minSalario", minSalario); // Pasa el valor ingresado por el usuario
+        model.addAttribute("minSalario", minSalario); 
 
         return "listView";
     }

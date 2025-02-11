@@ -17,12 +17,19 @@
     <title>Listado de empleados</title>
 </head>
 <body class="container-fluid my-5">
+    <!-- Menú superior -->
+    <nav th:fragment="menu" class="navbar navbar-dark bg-dark navbar-expand-sm">
+        <ul class="navbar-nav">
+            <li><a class="nav-link active" th:href="@{/}">Empleados</a></li>
+            <li><a class="nav-link active" th:href="@{/depto/}">Departamentos</a></li>
+        </ul>
+    </nav>
+
     <h1 class="text-center mb-4">Listado de empleados de la empresa</h1>
 
-    <!-- Formulario de búsqueda y filtro -->
     <form method="get" th:action="@{/list}" class="mb-4">
         <div class="row g-2">
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <input 
                     type="text" 
                     name="search" 
@@ -31,7 +38,8 @@
                     th:value="${search}" 
                 />
             </div>
-            <div class="col-md-3">
+    
+            <div class="col-md-2">
                 <select name="genero" class="form-control" id="genero" onchange="this.form.submit()">
                     <option value="" th:selected="${genero == null or genero == ''}">Todos</option>
                     <option th:value="MASCULINO" th:selected="${genero == 'MASCULINO'}">Masculino</option>
@@ -39,6 +47,32 @@
                     <option th:value="OTROS" th:selected="${genero == 'OTROS'}">Otros</option>
                 </select>
             </div>
+    
+            <div class="col-md-2">
+                <select name="departamentoId" class="form-control" id="departamento" onchange="this.form.submit()">
+                    <option value="">Todos los departamentos</option>
+                    <option th:each="dep : ${departamentos}" 
+                            th:value="${dep.id}" 
+                            th:text="${dep.nombre}" 
+                            th:selected="${departamentoId != null and departamentoId == dep.id}">
+                    </option>
+                </select>
+            </div>
+    
+            <div class="col-md-2">
+                <input 
+                    type="number" 
+                    name="minSalario" 
+                    class="form-control" 
+                    placeholder="Salario mayor a" 
+                    th:value="${minSalario}" 
+                    step="1000"
+                />
+            </div>
+    
+            <div class="mt-4">
+                <a th:href="@{/list?salarioMayorPromedio=true}" class="btn btn-info shadow-sm">Empleados con salario mayor al promedio</a>
+            </div>              
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100 shadow-sm">Buscar</button>
             </div>
@@ -63,6 +97,7 @@
                 <th>Salario</th>
                 <th>En Activo</th>
                 <th>Género</th>
+                <th>Departamento</th>
                 <th>Editar</th>
                 <th>Borrar</th>
             </tr>
@@ -77,6 +112,7 @@
                 <td th:text="${empleado.salario}"></td>
                 <td th:text="${empleado.enActivo} ? 'Sí' : 'No'"></td>
                 <td th:text="${empleado.genero}"></td>
+                <td th:text="${empleado.departamento != null} ? ${empleado.departamento.nombre} : 'Sin departamento'"></td> <!-- Mostrar departamento -->
                 <td>
                     <a th:href="@{/editar/{id}(id=${empleado.id})}" class="btn btn-sm btn-warning">Editar</a>
                 </td>
