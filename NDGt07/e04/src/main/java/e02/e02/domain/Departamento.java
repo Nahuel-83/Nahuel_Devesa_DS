@@ -30,20 +30,30 @@ public class Departamento {
     @Column(unique = true)
     private String nombre;
 
-    private Double presupuestoAnual;  
+    private Double presupuestoAnual;
 
-    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "departamento")
     private List<Empleado> empleados;
 
     public boolean presupuestoValido() {
-        double totalSalarios = empleados.stream()
-                .mapToDouble(Empleado::getSalario)
-                .sum();
-        return totalSalarios <= presupuestoAnual;
+
+        if (this.empleados != null && this.empleados.size() > 0) {
+            double totalSalarios = empleados.stream()
+                    .mapToDouble(Empleado::getSalario)
+                    .sum();
+            return totalSalarios <= presupuestoAnual;
+        } else
+            return true;
     }
 
     public boolean puedeAgregarSalario(double salario) {
-        double totalSalarios = empleados.stream().mapToDouble(Empleado::getSalario).sum();
+        if (empleados == null || empleados.isEmpty()) {
+            return salario <= presupuestoAnual;
+        }
+        double totalSalarios = empleados.stream()
+                .mapToDouble(Empleado::getSalario)
+                .sum();
         return (totalSalarios + salario) <= presupuestoAnual;
     }
+
 }

@@ -1,6 +1,6 @@
-    package e02.e02.domain;
+package e02.e02.domain;
 
-    public enum Genero {
+public enum Genero {
         MASCULINO, FEMENINO, OTROS;
-    }
+}
 

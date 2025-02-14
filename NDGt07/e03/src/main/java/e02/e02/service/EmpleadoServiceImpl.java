@@ -60,9 +60,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void borrar(Long id) throws RuntimeException {
-        empleadoRepository.deleteById(id);
+        try {
+            empleadoRepository.findById(id).ifPresent(empleado -> {
+                empleado.setDepartamento(null);
+                empleadoRepository.save(empleado);
+                empleadoRepository.delete(empleado);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el empleado", e);
+        }
     }
-
+    
     @Override
     public List<Empleado> buscarPorNombre(String search) {
         return empleadoRepository.findByNombreContainingIgnoreCase(search);

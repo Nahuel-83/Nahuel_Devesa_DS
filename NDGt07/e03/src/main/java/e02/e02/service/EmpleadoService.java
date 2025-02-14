@@ -16,7 +16,7 @@ public interface EmpleadoService {
 
     Empleado editar(Empleado empleado);
 
-    void borrar(Long id);
+    void borrar(Long id) throws RuntimeException;
 
     List<Empleado> buscarPorNombre(String search);
 

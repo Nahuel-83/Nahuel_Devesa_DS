@@ -134,13 +134,13 @@ public class EmpleadoController {
     @GetMapping("/borrar/{id}")
     public String showDelete(@PathVariable long id, RedirectAttributes redirectAttributes) {
         try {
-            empleadoService.borrar(id);
+            empleadoService.borrar(id); 
             redirectAttributes.addFlashAttribute("msg", "Empleado borrado correctamente");
             redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("msg", e.getMessage());
             redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
         }
-        return "redirect:/list";
+        return "redirect:/list"; 
     }
 }

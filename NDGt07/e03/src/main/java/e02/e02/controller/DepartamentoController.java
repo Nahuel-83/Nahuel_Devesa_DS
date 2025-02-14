@@ -1,11 +1,16 @@
 package e02.e02.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import e02.e02.domain.Departamento;
 import e02.e02.service.DepartamentoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/depto")
@@ -25,6 +30,7 @@ public class DepartamentoController {
         return "departamento/newFormView";
     }
 
+    // Crear un nuevo departamento
     @PostMapping("/nuevo/submit")
     public String createDepartamento(@ModelAttribute("departamentoForm") Departamento departamento, Model model) {
         try {
@@ -44,7 +50,7 @@ public class DepartamentoController {
     }
 
     @PostMapping("/editar/{id}/submit")
-    public String updateDepartamento(@ModelAttribute("departamentoForm") Departamento departamento, Model model) {
+    public String updateDepartamento(@ModelAttribute("departamento") Departamento departamento, Model model) {
         try {
             departamentoService.editar(departamento);
             return "redirect:/depto/";
@@ -55,7 +61,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/borrar/{id}")
-    public String deleteDepartamento(@PathVariable Long id) {
+    public String eliminarDepartamento(@PathVariable Long id) {
         departamentoService.borrar(id);
         return "redirect:/depto/";
     }

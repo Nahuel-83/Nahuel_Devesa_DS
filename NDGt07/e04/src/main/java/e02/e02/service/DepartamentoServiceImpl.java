@@ -20,7 +20,7 @@ public class DepartamentoServiceImpl implements DepartamentoService {
     @Override
     public Departamento obtenerPorId(Long id) {
         return departamentoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Departamento no encontrado con ID: " + id));
     }
 
     @Override
@@ -28,25 +28,22 @@ public class DepartamentoServiceImpl implements DepartamentoService {
         if (existeDepartamentoPorNombre(departamento.getNombre())) {
             throw new RuntimeException("Ya existe un departamento con ese nombre.");
         }
-        if (!departamento.presupuestoValido()) {
-            throw new RuntimeException("El presupuesto anual es insuficiente para los salarios.");
-        }
         return departamentoRepository.save(departamento);
     }
 
     @Override
     public Departamento editar(Departamento departamento) {
-        if (existeDepartamentoPorNombre(departamento.getNombre())) {
-            throw new RuntimeException("Ya existe un departamento con ese nombre.");
-        }
-        if (!departamento.presupuestoValido()) {
+        if (departamento.presupuestoValido()) {
+            return departamentoRepository.save(departamento);
+            
+        } else { 
             throw new RuntimeException("El presupuesto anual es insuficiente para los salarios.");
         }
-        return departamentoRepository.save(departamento);
     }
 
     @Override
     public void borrar(Long id) {
+        obtenerPorId(id);
         departamentoRepository.deleteById(id);
     }
 

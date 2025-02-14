@@ -3,7 +3,9 @@ package e02.e02.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import e02.e02.domain.Empleado;
@@ -21,4 +23,8 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
     List<Empleado> queryBySalarioOverAverage();
 
     List<Empleado> findByDepartamentoId(Long departamentoId);
+
+    @Modifying
+    @Query("UPDATE Empleado e SET e.departamento = NULL WHERE e.id = :id")
+    void quitarDepartamento(@Param("id") Long id);
 }

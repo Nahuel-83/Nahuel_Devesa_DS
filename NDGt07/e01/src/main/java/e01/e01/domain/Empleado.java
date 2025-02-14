@@ -1,5 +1,6 @@
 package e01.e01.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,6 +36,7 @@ public class Empleado {
 
     private Double salario;
 
+    @Column(name = "en_activo")
     private boolean enActivo;
 
     @Enumerated(EnumType.STRING)

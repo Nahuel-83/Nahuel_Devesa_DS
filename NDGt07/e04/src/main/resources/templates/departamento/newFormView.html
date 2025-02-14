@@ -13,6 +13,12 @@
 <body class="container mt-5">
     <h1 class="mb-4">Nuevo Departamento</h1>
 
+    <!-- Mostrar error si existe -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Formulario de creación de nuevo departamento -->
     <form th:action="@{/depto/nuevo/submit}" th:object="${departamentoForm}" method="post" class="mb-3">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>

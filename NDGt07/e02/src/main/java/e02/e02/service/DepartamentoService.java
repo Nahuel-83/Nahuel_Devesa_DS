@@ -1,6 +1,8 @@
 package e02.e02.service;
 
 import e02.e02.domain.Departamento;
+import e02.e02.domain.Empleado;
+
 import java.util.List;
 
 public interface DepartamentoService {
@@ -15,4 +17,6 @@ public interface DepartamentoService {
     void borrar(Long id);
 
     boolean existeDepartamentoPorNombre(String nombre); 
+    
+    List<Empleado> obtenerEmpleadosPorDepartamento(Long idDepartamento);
 }
