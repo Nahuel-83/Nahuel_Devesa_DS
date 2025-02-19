@@ -11,6 +11,8 @@ public interface VacaService {
 
     public List<Vacas> listarVacas();
 
+    Vacas obtenerPorId(Long id) throws RuntimeException;
+
     public Vacas guardarVaca(Vacas vaca);
 
     public Vacas actualizarVaca(Vacas vaca);
