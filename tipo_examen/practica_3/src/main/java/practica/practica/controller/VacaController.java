@@ -29,7 +29,7 @@ public class VacaController {
         return "vacas/list";
     }
 
-    @GetMapping("/vacas/buscar")
+    @GetMapping("/buscar")
     public String searchVacas(@RequestParam(required = false) String nombre, Model model) {
         List<Vaca> vacas;
         if (nombre != null && !nombre.isEmpty()) {

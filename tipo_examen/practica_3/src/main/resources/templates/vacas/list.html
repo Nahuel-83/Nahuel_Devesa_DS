@@ -8,6 +8,10 @@
 <body>
     <div th:replace="fragments :: navbar"></div>
     <h1>Listado de Vacas</h1>
+    <form action="/buscar" method="get">
+        <input type="text" name="nombre" placeholder="Buscar por nombre" />
+        <button type="submit">Buscar</button>
+    </form>
     <a href="/nuevo">Crear Nueva Vaca</a>
     <table border="1">
         <thead>
@@ -16,7 +20,7 @@
                 <th>Nombre</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Peso</th>
-                <th>Explotación</th> 
+                <th>Explotación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -27,8 +31,7 @@
                 <td th:text="${#temporals.format(vaca.fechaNacimiento, 'dd/MM/yyyy')}"></td>
                 <td th:text="${vaca.peso}"></td>
                 <td>
-                    <span th:each="explotacion : ${vaca.explotaciones}" 
-                          th:text="${explotacion.nombreEmpresa}"></span>
+                    <span th:each="explotacion : ${vaca.explotaciones}" th:text="${explotacion.nombreEmpresa}"></span>
                 </td>
                 <td>
                     <a th:href="@{/editar/{id}(id=${vaca.id})}">Editar</a>
